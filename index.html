@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
+    <title>Neon Surfers Android Frame</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="gameContainer">
+        <div id="uiContainer">
+            <div class="hud-element">SCORE: <span id="scoreVal">0</span></div>
+            <div class="hud-element" style="color: #00ffcc;">SPEED: <span id="multVal">1.0x</span></div>
+            <button id="pauseBtn" class="btn-pause" onclick="togglePause()">⏸</button>
+        </div>
+
+        <canvas id="gameCanvas" width="360" height="740"></canvas>
+        
+        <div id="startScreen" class="overlay-screen">
+            <h1 class="game-title">BALL<br>SURFERS</h1>
+            <p class="game-subtitle">Android Edition</p>
+            <button class="btn-action" onclick="startGame()">PLAY NOW</button>
+        </div>
+
+        <div id="gameOverScreen" class="overlay-screen hidden">
+            <h2 class="danger-title">GAME OVER</h2>
+            <div class="score-board">
+                <p>FINAL SCORE: <span id="finalScore">0</span></p>
+                <p>COINS CAUGHT: <span id="finalCoins">0</span></p>
+            </div>
+            <button class="btn-action restart" onclick="resetGame()">RUN AGAIN</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

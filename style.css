@@ -1,0 +1,185 @@
+:root {
+    --neon-yellow: #ffea00;
+    --neon-pink: #ff0055;
+    --neon-cyan: #00f0ff;
+    --bg-dark: #0a0a12;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-dark);
+    color: white;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden; 
+    touch-action: none;
+    background-image: 
+        radial-gradient(at 50% 30%, #1e1135 0px, transparent 50%),
+        radial-gradient(at 0% 0%, #071026 0px, transparent 50%);
+}
+
+/* LOCKED NATIVE ANDROID ASPECT RATIO FRAME (360x740) */
+#gameContainer {
+    position: relative;
+    width: 360px;
+    height: 740px;
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.35);
+    border-radius: 10px; /* Smoother curve mimicking phone bezels */
+    overflow: hidden;
+    background: #0d0d18;
+    border: 1px solid #1a1a2e; /* Simulated phone boundary notch */
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* HUD Panel absolute pinned inside the top of the device screen */
+#uiContainer {
+    position: absolute;
+    top: 10px; /* Shifted down slightly to clear safe-areas */
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    z-index: 5; 
+    pointer-events: none; 
+}
+
+.hud-element, .btn-pause {
+    pointer-events: auto; 
+    background: rgba(10, 10, 18, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: var(--neon-yellow);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* Pause Button Styles */
+.btn-pause {
+    cursor: pointer;
+    background: rgba(0, 240, 255, 0.15);
+    border-color: rgba(0, 240, 255, 0.3);
+    color: var(--neon-cyan);
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.btn-pause.paused-state {
+    background: rgba(255, 0, 85, 0.25);
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+}
+
+/* Screen overlays */
+.overlay-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(8, 8, 14, 0.92);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 00;
+    padding: 00px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.game-title {
+    font-size: 36px;
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-pink), 0 0 30px var(--neon-pink);
+}
+
+.game-subtitle {
+    color: var(--neon-cyan);
+    letter-spacing: 4px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+.danger-title {
+    font-size: 34px;
+    color: var(--neon-pink);
+    text-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
+    margin: 0 0 20px 0;
+}
+
+.score-board {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 15px 25px;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 80%;
+}
+
+.score-board p { margin: 6px 0; font-size: 13px; color: #aaa; }
+.score-board span { color: #fff; font-weight: bold; font-size: 16px; }
+
+.btn-action {
+    background: linear-gradient(135deg, var(--neon-cyan), #0077ff);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
+    width: 80%;
+    text-align: center;
+}
+
+.btn-action.restart {
+    background: linear-gradient(135deg, var(--neon-pink), #bc00dd);
+    box-shadow: 0 6px 20px rgba(255, 0, 85, 0.4);
+}
+
+.controls-guide {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 10px;
+    color: #565975;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* RESPONSIVE SCALING IF THE WEB BROWSER IS SMALLER THAN AN ANDROID SCREEN */
+@media (max-width: 340px) or (max-height: 780px) {
+    #gameContainer {
+        transform: scale(0.25); /* Scales down uniformly to fit tiny browser viewports */
+    }
+}
